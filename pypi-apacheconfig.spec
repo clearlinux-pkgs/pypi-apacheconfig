@@ -4,14 +4,13 @@
 #
 Name     : pypi-apacheconfig
 Version  : 0.3.2
-Release  : 4
+Release  : 5
 URL      : https://files.pythonhosted.org/packages/cd/b5/b810fede6b3d74f0f9a6357b8e38f124be06030143c0ca5239ed08e277ac/apacheconfig-0.3.2.tar.gz
 Source0  : https://files.pythonhosted.org/packages/cd/b5/b810fede6b3d74f0f9a6357b8e38f124be06030143c0ca5239ed08e277ac/apacheconfig-0.3.2.tar.gz
 Summary  : Apache config file parser
 Group    : Development/Tools
 License  : BSD-2-Clause
 Requires: pypi-apacheconfig-bin = %{version}-%{release}
-Requires: pypi-apacheconfig-filemap = %{version}-%{release}
 Requires: pypi-apacheconfig-license = %{version}-%{release}
 Requires: pypi-apacheconfig-python = %{version}-%{release}
 Requires: pypi-apacheconfig-python3 = %{version}-%{release}
@@ -31,18 +30,9 @@ BuildRequires : pypi(six)
 Summary: bin components for the pypi-apacheconfig package.
 Group: Binaries
 Requires: pypi-apacheconfig-license = %{version}-%{release}
-Requires: pypi-apacheconfig-filemap = %{version}-%{release}
 
 %description bin
 bin components for the pypi-apacheconfig package.
-
-
-%package filemap
-Summary: filemap components for the pypi-apacheconfig package.
-Group: Default
-
-%description filemap
-filemap components for the pypi-apacheconfig package.
 
 
 %package license
@@ -65,7 +55,6 @@ python components for the pypi-apacheconfig package.
 %package python3
 Summary: python3 components for the pypi-apacheconfig package.
 Group: Default
-Requires: pypi-apacheconfig-filemap = %{version}-%{release}
 Requires: python3-core
 Provides: pypi(apacheconfig)
 Requires: pypi(ply)
@@ -87,7 +76,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1652992864
+export SOURCE_DATE_EPOCH=1652994928
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -133,10 +122,6 @@ popd
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/apacheconfigtool
-
-%files filemap
-%defattr(-,root,root,-)
-/usr/share/clear/filemap/filemap-pypi-apacheconfig
 
 %files license
 %defattr(0644,root,root,0755)
