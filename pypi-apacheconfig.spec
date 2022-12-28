@@ -4,7 +4,7 @@
 #
 Name     : pypi-apacheconfig
 Version  : 0.3.2
-Release  : 13
+Release  : 14
 URL      : https://files.pythonhosted.org/packages/cd/b5/b810fede6b3d74f0f9a6357b8e38f124be06030143c0ca5239ed08e277ac/apacheconfig-0.3.2.tar.gz
 Source0  : https://files.pythonhosted.org/packages/cd/b5/b810fede6b3d74f0f9a6357b8e38f124be06030143c0ca5239ed08e277ac/apacheconfig-0.3.2.tar.gz
 Summary  : Apache config file parser
@@ -17,6 +17,9 @@ Requires: pypi-apacheconfig-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
 BuildRequires : pypi(ply)
 BuildRequires : pypi(six)
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 
 %description
 # Apache-style config parser
@@ -76,15 +79,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656355550
+export SOURCE_DATE_EPOCH=1672250010
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
@@ -101,7 +104,7 @@ popd
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-apacheconfig
-cp %{_builddir}/apacheconfig-0.3.2/LICENSE.rst %{buildroot}/usr/share/package-licenses/pypi-apacheconfig/03df29eb9eda80d9d9701a9626b8acb2d33e90d0
+cp %{_builddir}/apacheconfig-%{version}/LICENSE.rst %{buildroot}/usr/share/package-licenses/pypi-apacheconfig/03df29eb9eda80d9d9701a9626b8acb2d33e90d0
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
